@@ -4,7 +4,7 @@ import { FiMenu } from 'react-icons/fi';
 import { IoSearchOutline } from 'react-icons/io5';
 import { BsGrid3X3Gap } from 'react-icons/bs';
 import { HiOutlineDotsVertical } from 'react-icons/hi';
-import youtub_logo from '../data/youtube_logo.png';
+import youtub_logo from '../../data/youtube_logo.png';
 
 const Header = () => {
   return (
