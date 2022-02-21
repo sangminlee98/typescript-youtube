@@ -1,21 +1,24 @@
-import React from 'react';
-import { useEffect } from 'react';
-import { useState } from 'react';
-import { getVideos, VideoDatas } from './api/getVideos';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import './App.css';
+import Header from './components/Header';
+import { RootState } from './module';
+import { getMostPolularThunk } from './module/mostPopular';
 
 function App() {
-  const [data, setData] = useState<VideoDatas[]>();
-  const fetchData = () => {
-    getVideos().then(items => setData(items));
-  };
-  useEffect(() => {
-    fetchData();
-  },[]);
-  data && console.log(data[0].id);
+  // const {loading, datas} = useSelector(({mostPopular}: RootState) => ({
+  //   loading: mostPopular.loading,
+  //   datas: mostPopular.datas
+  // }));
+  // const dispatch = useDispatch();
+  // useEffect(() => {
+  //   dispatch(getMostPolularThunk());
+  // },[dispatch]);
+  // if(loading) return (<p>로딩중...</p>);
+  // datas && console.log(datas)
   return (
     <div>
-      
+      <Header/>
     </div>
   );
 }
