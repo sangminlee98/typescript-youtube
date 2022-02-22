@@ -8,6 +8,7 @@ const Main = () => {
     <div className={styles.container}>
       <Menu/>
       <Content/>
+      <div></div>
     </div>
   );
 };

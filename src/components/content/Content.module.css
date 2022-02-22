@@ -2,7 +2,7 @@
   margin-left: 240px;
   flex: 1;
   padding: 12px;
-  overflow: auto;
+  overflow-y: scroll;
   box-sizing: border-box;
 }
 

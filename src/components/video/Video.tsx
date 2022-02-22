@@ -36,7 +36,7 @@ const Video = ({id, thumbnail, title, channelId, publishedAt}: Props) => {
       <div className={styles.info}>
         <img src={channelInfo?.thumbnails.medium.url} alt="channelThumbnail" className={styles.channelThumbnail}/>
         <div className={styles.metadata}>
-          <h3 className={styles.title}>{title}</h3>
+          <h4 className={styles.title}>{title}</h4>
           <p className={styles.channelTitle}>{channelInfo?.title}</p>
           <div className={styles.desc}>
             <span className={styles.viewCount}>{processViewCount(statistics?.viewCount!)}</span>
