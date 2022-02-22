@@ -20,7 +20,7 @@ export interface Item {
 }
 
 export interface Statistics {
-  viewCount:     string;
+  viewCount:     number;
   likeCount:     string;
   favoriteCount: string;
   commentCount:  string;

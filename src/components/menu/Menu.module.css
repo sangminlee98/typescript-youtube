@@ -5,4 +5,5 @@
   top: 56px;
   padding: 12px 12px 12px 0;
   background: white;
+  box-sizing: border-box;
 }

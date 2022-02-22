@@ -1,0 +1,55 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 300px;
+}
+.thumbnail {
+  width: 100%;
+  height: 50%;
+  margin-bottom: 0.5em;
+}
+
+.info {
+  width: 100%;
+  display: flex;
+  padding: 0.5em;
+  box-sizing: border-box;
+}
+
+.channelThumbnail {
+  width: 2.5em;
+  height: 2.5em;
+  border-radius: 50%;
+  margin-right: 0.5em;
+}
+
+.metadata {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.title {
+  height: 2.5em;
+  width: 100%;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.channelTitle {
+  margin-bottom: 0.2em;
+}
+
+.desc {
+  display: flex;
+  font-size: 0.8em;
+}
+
+.viewCount::after {
+  content: " • ";
+}

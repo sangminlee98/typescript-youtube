@@ -3,4 +3,5 @@
   flex: 1;
   padding: 12px 0 12px 12px;
   overflow: auto;
+  box-sizing: border-box;
 }

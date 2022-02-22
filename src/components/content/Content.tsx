@@ -25,6 +25,7 @@ const Content = () => {
             thumbnail={video.snippet.thumbnails.medium.url}
             title={video.snippet.title}
             channelId={video.snippet.channelId}
+            publishedAt={video.snippet.publishedAt}
           />
         ))
       }
