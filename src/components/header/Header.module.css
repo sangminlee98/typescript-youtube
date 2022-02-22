@@ -35,6 +35,9 @@
   border: 1px solid #d3d3d3;
   box-sizing: border-box;
   flex: 1;
+  outline: none;
+  font-size: 1.2em;
+  padding: 0.3em;
 }
 .search-icon {
   width: 24px;
