@@ -17,18 +17,22 @@ const Content = () => {
   if(loading) return <p>로딩중...</p>;
   return (
     <div className={styles.container}>
-      {
-        datas && datas.map(video => (
-          <Video 
-            key={video.id}
-            id={video.id}
-            thumbnail={video.snippet.thumbnails.medium.url}
-            title={video.snippet.title}
-            channelId={video.snippet.channelId}
-            publishedAt={video.snippet.publishedAt}
-          />
-        ))
-      }
+      <div className={styles.grid}>
+        {
+          datas && datas.map(video => (
+            <div className={styles.gridItem}>
+              <Video 
+                key={video.id}
+                id={video.id}
+                thumbnail={video.snippet.thumbnails.medium.url}
+                title={video.snippet.title}
+                channelId={video.snippet.channelId}
+                publishedAt={video.snippet.publishedAt}
+              />
+            </div>
+          ))
+        }
+      </div>
     </div>
   );
 };
