@@ -1,14 +1,14 @@
 import React, { useEffect }  from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../module';
-import { getMostPolularThunk } from '../../module/mostPopular';
+import { getMostPolularThunk } from '../../module/videos';
 import Video from '../video/Video';
 import styles from './Content.module.css';
 
 const Content = () => {
-  const {loading, datas} = useSelector(({mostPopular}: RootState) => ({
-    loading: mostPopular.loading,
-    datas: mostPopular.datas
+  const {loading, datas} = useSelector(({videos}: RootState) => ({
+    loading: videos.loading,
+    datas: videos.datas
   }));
   const dispatch = useDispatch();
   useEffect(() => {
@@ -19,11 +19,10 @@ const Content = () => {
     <div className={styles.container}>
       <div className={styles.grid}>
         {
-          datas && datas.map(video => (
-            <div className={styles.gridItem}>
+          datas && datas.map((video, index) => (
+            <div className={styles.gridItem} key={index}>
               <Video 
-                key={video.id}
-                id={video.id}
+                id={typeof video.id === 'string' ? video.id : video.id.videoId}
                 thumbnail={video.snippet.thumbnails.medium.url}
                 title={video.snippet.title}
                 channelId={video.snippet.channelId}

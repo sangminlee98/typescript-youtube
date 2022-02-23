@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux';
-import mostPopular from './mostPopular';
+import videos from './videos';
 const rootReducer = combineReducers({
-  mostPopular
+  videos
 });
 
 export type RootState = ReturnType<typeof rootReducer>;
