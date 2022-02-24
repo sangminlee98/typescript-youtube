@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 export const getSearchVideos = async (query: string) => {
-  const response = await axios.get<SearchVideos>(`https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=25&q=${query}&type=&key=${process.env.REACT_APP_API_KEY}`);
+  const response = await axios.get<SearchVideos>(`https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=25&q=${query}&type=video&key=${process.env.REACT_APP_API_KEY}`);
   return response.data.items;
 }
 

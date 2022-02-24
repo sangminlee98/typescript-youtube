@@ -6,6 +6,7 @@ import Video from '../video/Video';
 import styles from './Content.module.css';
 
 const Content = () => {
+  const parser = new DOMParser();
   const {loading, datas} = useSelector(({videos}: RootState) => ({
     loading: videos.loading,
     datas: videos.datas
@@ -14,7 +15,7 @@ const Content = () => {
   useEffect(() => {
     dispatch(getMostPolularThunk());
   },[dispatch]);
-  if(loading) return <p>로딩중...</p>;
+  if(loading) return (<p>로딩중...</p>);
   return (
     <div className={styles.container}>
       <div className={styles.grid}>
@@ -24,7 +25,7 @@ const Content = () => {
               <Video 
                 id={typeof video.id === 'string' ? video.id : video.id.videoId}
                 thumbnail={video.snippet.thumbnails.medium.url}
-                title={video.snippet.title}
+                title={parser.parseFromString(video.snippet.title,'text/html').body.innerHTML}
                 channelId={video.snippet.channelId}
                 publishedAt={video.snippet.publishedAt}
               />
