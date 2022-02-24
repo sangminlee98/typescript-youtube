@@ -15,7 +15,11 @@ const Content = () => {
   useEffect(() => {
     dispatch(getMostPolularThunk());
   },[dispatch]);
-  if(loading) return (<p>로딩중...</p>);
+  if(loading) return (
+    <div className={styles.container}>
+      <p>로딩중...</p>
+    </div>
+  );
   return (
     <div className={styles.container}>
       <div className={styles.grid}>

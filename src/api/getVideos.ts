@@ -15,10 +15,10 @@ export interface VideoDatas {
   kind:    string;
   etag:    string;
   id:      string;
-  snippet: Snippet;
+  snippet: GetVideoSnippet;
 }
 
-export interface Snippet {
+export interface GetVideoSnippet {
   publishedAt:          Date;
   channelId:            string;
   title:                string;

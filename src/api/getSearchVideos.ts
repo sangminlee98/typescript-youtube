@@ -18,7 +18,7 @@ export interface SearchVideosData {
   kind:    ItemKind;
   etag:    string;
   id:      ID;
-  snippet: Snippet;
+  snippet: SearchSnippet;
 }
 
 export interface ID {
@@ -34,7 +34,7 @@ export enum ItemKind {
   YoutubeSearchResult = "youtube#searchResult",
 }
 
-export interface Snippet {
+export interface SearchSnippet {
   publishedAt:          Date;
   channelId:            string;
   title:                string;
