@@ -7,6 +7,8 @@ import { HiOutlineDotsVertical } from 'react-icons/hi';
 import youtub_logo from '../../data/youtube_logo.png';
 import { useDispatch } from 'react-redux';
 import { getSearchVideosThunk } from '../../module/videos';
+import { Link } from 'react-router-dom';
+import { init } from '../../module/selectedVideo';
 
 const Header = () => {
   const [input,setInput] = useState('');
@@ -24,11 +26,14 @@ const Header = () => {
       onSubmit();
     }
   }
+  const initSelect = () => {
+    dispatch(init());
+  }
   return (
     <div className={styles.header}>
       <div className={styles.tab}>
         <FiMenu className={styles.icon}/>
-        <img src={youtub_logo} alt="logo" className={styles.logo}/>
+        <Link to='/'><img src={youtub_logo} alt="logo" onClick={initSelect} className={styles.logo}/></Link>
       </div>
       <div className={styles['center-tab']}>
         <input className={styles.input} value={input} onChange={onChange} onKeyDown={onKeydown}/>

@@ -11,6 +11,9 @@ const Content = () => {
     loading: videos.loading,
     datas: videos.datas
   }));
+  const {selected} = useSelector(({selectedVideo}: RootState) => ({
+    selected: selectedVideo?.selected
+  }));
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getMostPolularThunk());
@@ -21,11 +24,11 @@ const Content = () => {
     </div>
   );
   return (
-    <div className={styles.container}>
-      <div className={styles.grid}>
+    <div className={selected ? styles.selectedContainer : styles.container}>
+      <div className={selected ? '' : styles.grid}>
         {
           datas && datas.map((video, index) => (
-            <div className={styles.gridItem} key={index}>
+            <div className={selected ? '' : styles.gridItem} key={index}>
               <Video 
                 id={typeof video.id === 'string' ? video.id : video.id.videoId}
                 thumbnail={video.snippet.thumbnails.medium.url}

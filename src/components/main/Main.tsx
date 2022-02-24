@@ -17,6 +17,7 @@ const Main = () => {
       <Route path='/video' element={
         <div className={styles.container}>
           <VideoDetail/>
+          <Content/>
         </div>}
       />
     </Routes>
