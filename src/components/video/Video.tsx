@@ -6,6 +6,10 @@ import processViewCount from '../../utils/processViewCount';
 import styles from './Video.module.css';
 import "moment/locale/ko"
 import * as moment from 'moment'
+import { useDispatch } from 'react-redux';
+import { VideoDatas } from '../../api/getVideos';
+import { SearchVideosData } from '../../api/getSearchVideos';
+import { select } from '../../module/selectedVideo';
 moment.locale('ko');
 
 type Props = {
@@ -13,11 +17,13 @@ type Props = {
   thumbnail: string,
   title: string,
   channelId: string,
-  publishedAt: Date
+  publishedAt: Date,
+  video: VideoDatas | SearchVideosData
 }
-const Video = ({id, thumbnail, title, channelId, publishedAt}: Props) => {
+const Video = ({id, thumbnail, title, channelId, publishedAt, video}: Props) => {
   const [statistics, setStatistics] = useState<Statistics | null>();
   const [channelInfo, setChannelInfo] = useState<ChannelInfo | null>();
+  const dispatch = useDispatch();
   const onGetStatistics = async (id: string) => {
     const staitstics = await getStatistics(id);
     setStatistics(staitstics);
@@ -26,12 +32,15 @@ const Video = ({id, thumbnail, title, channelId, publishedAt}: Props) => {
     const channelInfo = await getChannels(id);
     setChannelInfo(channelInfo);
   }
+  const onClick = () => {
+    dispatch(select(video));
+  }
   useEffect(() => {
     onGetStatistics(id);
     onGetChannelInfo(channelId);
   },[id, channelId]);
   return (
-    <div className={styles.container}>
+    <div className={styles.container} onClick={onClick}>
       <img src={thumbnail} alt="thumbnail" className={styles.thumbnail} />
       <div className={styles.info}>
         <img src={channelInfo?.thumbnails.medium.url} alt="channelThumbnail" className={styles.channelThumbnail}/>

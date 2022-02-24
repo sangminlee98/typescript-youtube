@@ -32,6 +32,7 @@ const Content = () => {
                 title={parser.parseFromString(video.snippet.title,'text/html').body.innerHTML}
                 channelId={video.snippet.channelId}
                 publishedAt={video.snippet.publishedAt}
+                video={video}
               />
             </div>
           ))
