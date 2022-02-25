@@ -47,7 +47,7 @@ const Video = ({id, thumbnail, title, channelId, publishedAt, video}: Props) => 
     onGetChannelInfo(channelId);
   },[id, channelId]);
   return (
-    <Link to='/video'>
+    <Link to={`/video/${id}`}>
       <div className={selected ? styles.selectedContainer : styles.container} onClick={onClick}>
         <img src={thumbnail} alt="thumbnail" className={styles.thumbnail} />
         <div className={styles.info}>
