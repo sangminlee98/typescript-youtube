@@ -9,7 +9,7 @@ import * as moment from 'moment'
 import { useDispatch, useSelector } from 'react-redux';
 import { VideoDatas } from '../../api/getVideos';
 import { SearchVideosData } from '../../api/getSearchVideos';
-import { select } from '../../module/selectedVideo';
+import { select, selectChannel, selectStatistics } from '../../module/selectedVideo';
 import { Link } from 'react-router-dom';
 import { RootState } from '../../module';
 moment.locale('ko');
@@ -39,6 +39,8 @@ const Video = ({id, thumbnail, title, channelId, publishedAt, video}: Props) => 
   }
   const onClick = () => {
     dispatch(select(video));
+    statistics && dispatch(selectStatistics(statistics));
+    channelInfo && dispatch(selectChannel(channelInfo));
   }
   useEffect(() => {
     onGetStatistics(id);

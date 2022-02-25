@@ -4,9 +4,12 @@ import { useSelector } from 'react-redux';
 import { RootState } from '../../module';
 
 const VideoDetail = () => {
-  const {id, snippet} = useSelector(({selectedVideo}: RootState) => ({
+  const parser = new DOMParser();
+  const {id, snippet, statistics, channelInfo} = useSelector(({selectedVideo}: RootState) => ({
     id: selectedVideo?.id,
-    snippet: selectedVideo?.snippet
+    snippet: selectedVideo?.snippet,
+    statistics: selectedVideo?.statistics,
+    channelInfo: selectedVideo?.channelInfo
   }));
   
   return (
@@ -19,7 +22,14 @@ const VideoDetail = () => {
         src={`https://www.youtube.com/embed/${id}`}
         allowFullScreen
       />
-      <h1>{snippet?.title}</h1>
+      <div className={styles.infoContainer}>
+        <h1 className={styles.title}>{parser.parseFromString(snippet!.title,'text/html').body.innerHTML}</h1>
+        <div className={styles.metadata}>
+          <p>조회수 {statistics?.viewCount}</p>
+          <p>{snippet?.publishedAt}</p>
+        </div>
+      </div>
+      
     </div>
   );
 };
