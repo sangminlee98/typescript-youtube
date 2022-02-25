@@ -6,11 +6,12 @@ import { BsGrid3X3Gap } from 'react-icons/bs';
 import { HiOutlineDotsVertical } from 'react-icons/hi';
 import youtub_logo from '../../data/youtube_logo.png';
 import { useDispatch } from 'react-redux';
-import { getSearchVideosThunk } from '../../module/videos';
-import { Link } from 'react-router-dom';
+import { getSearchVideosThunk, getMostPolularThunk } from '../../module/videos';
+import { Link, useNavigate } from 'react-router-dom';
 import { init } from '../../module/selectedVideo';
 
 const Header = () => {
+  const navigate = useNavigate();
   const [input,setInput] = useState('');
   const dispatch = useDispatch();
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -19,6 +20,8 @@ const Header = () => {
   const onSubmit = () => {
     dispatch(getSearchVideosThunk(input));
     setInput('');
+    navigate('/');
+    dispatch(init());
   }
   const onKeydown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if(e.nativeEvent.isComposing) return;
@@ -26,14 +29,15 @@ const Header = () => {
       onSubmit();
     }
   }
-  const initSelect = () => {
+  const onClickLogo = () => {
     dispatch(init());
+    dispatch(getMostPolularThunk());
   }
   return (
     <div className={styles.header}>
       <div className={styles.tab}>
         <FiMenu className={styles.icon}/>
-        <Link to='/'><img src={youtub_logo} alt="logo" onClick={initSelect} className={styles.logo}/></Link>
+        <Link to='/'><img src={youtub_logo} alt="logo" onClick={onClickLogo} className={styles.logo}/></Link>
       </div>
       <div className={styles['center-tab']}>
         <input className={styles.input} value={input} onChange={onChange} onKeyDown={onKeydown}/>

@@ -19,6 +19,7 @@ const VideoDetail = () => {
         src={`https://www.youtube.com/embed/${id}`}
         allowFullScreen
       />
+      <h1>{snippet?.title}</h1>
     </div>
   );
 };
