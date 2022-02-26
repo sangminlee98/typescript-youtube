@@ -7,11 +7,13 @@ import 'moment/locale/ko';
 import * as moment from 'moment';
 import { ChannelStatistics, getChannelStatistics } from '../../api/getChannelStatistics';
 import processSubscribeCount from '../../utils/processSubscribeCount';
+import { Comments, getComments } from '../../api/getComments';
 moment.locale('ko');
 
 const VideoDetail = () => {
   const parser = new DOMParser();
   const [channelStatistics, setChannelStatistics] = useState<ChannelStatistics | null>();
+  const [comments, setComments] = useState<Comments | null>();
   const {id, snippet, statistics, channelInfo} = useSelector(({selectedVideo}: RootState) => ({
     id: typeof selectedVideo?.id === 'string' ? selectedVideo.id : selectedVideo?.id?.videoId,
     snippet: selectedVideo?.snippet,
@@ -21,10 +23,16 @@ const VideoDetail = () => {
   const onGetChannelStatistics = async (id: string) => {
     const statistics = await getChannelStatistics(id);
     setChannelStatistics(statistics);
+  };
+  const onGetComments = async (videoId: string) => {
+    const commentsData = await getComments(videoId);
+    setComments(commentsData);
   }
   useEffect(() => {
     onGetChannelStatistics(snippet?.channelId!);
-  },[snippet]);
+    id && onGetComments(id);
+  },[snippet,id]);
+  console.log(comments);
   return (
     <div className={styles.container}>
       <iframe
@@ -50,6 +58,10 @@ const VideoDetail = () => {
           <p className={styles.channelSubscribe}>{processSubscribeCount(channelStatistics?.subscriberCount!)}</p>
           <p className={styles.describe}>{snippet?.description}</p>
         </div>
+      </div>
+      <hr />
+      <div className={styles.commentsContainer}>
+        
       </div>
       <div style={{height: '100px'}}></div>
     </div>
