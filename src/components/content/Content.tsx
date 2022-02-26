@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom';
 import { RootState } from '../../module';
 import { init } from '../../module/selectedVideo';
 import { getMostPolularThunk } from '../../module/videos';
+import {AiOutlineLoading3Quarters} from 'react-icons/ai';
 import Video from '../video/Video';
 import styles from './Content.module.css';
 
@@ -27,8 +28,8 @@ const Content = () => {
     }
   },[param,dispatch])
   if(loading) return (
-    <div className={styles.container}>
-      <p>로딩중...</p>
+    <div className={styles.loadingContainer}>
+      <AiOutlineLoading3Quarters className={styles.loadingIcon}/>
     </div>
   );
   return (
