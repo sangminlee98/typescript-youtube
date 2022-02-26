@@ -1,12 +1,15 @@
 import React, { useEffect }  from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
 import { RootState } from '../../module';
+import { init } from '../../module/selectedVideo';
 import { getMostPolularThunk } from '../../module/videos';
 import Video from '../video/Video';
 import styles from './Content.module.css';
 
 const Content = () => {
   const parser = new DOMParser();
+  const param = useParams();
   const {loading, datas} = useSelector(({videos}: RootState) => ({
     loading: videos.loading,
     datas: videos.datas
@@ -18,6 +21,11 @@ const Content = () => {
   useEffect(() => {
     dispatch(getMostPolularThunk());
   },[dispatch]);
+  useEffect(() => {
+    if(param.id === undefined) {
+      dispatch(init());
+    }
+  },[param,dispatch])
   if(loading) return (
     <div className={styles.container}>
       <p>로딩중...</p>
