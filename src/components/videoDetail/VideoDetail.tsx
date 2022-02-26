@@ -33,7 +33,6 @@ const VideoDetail = () => {
     onGetChannelStatistics(snippet?.channelId!);
     id && onGetComments(id);
   },[snippet,id]);
-  channelStatistics && console.log(channelStatistics.subscriberCount);
   return (
     <div className={styles.container}>
       <iframe
