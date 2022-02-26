@@ -8,6 +8,7 @@ import * as moment from 'moment';
 import { ChannelStatistics, getChannelStatistics } from '../../api/getChannelStatistics';
 import processSubscribeCount from '../../utils/processSubscribeCount';
 import { Comments, getComments } from '../../api/getComments';
+import Comment from '../comment/Comment';
 moment.locale('ko');
 
 const VideoDetail = () => {
@@ -32,7 +33,7 @@ const VideoDetail = () => {
     onGetChannelStatistics(snippet?.channelId!);
     id && onGetComments(id);
   },[snippet,id]);
-  console.log(comments);
+  channelStatistics && console.log(channelStatistics.subscriberCount);
   return (
     <div className={styles.container}>
       <iframe
@@ -55,13 +56,18 @@ const VideoDetail = () => {
         <img className={styles.channelThumbnail} src={channelInfo?.thumbnails.medium.url} alt="channelThumbnail" />
         <div className={styles.channelInfo}>
           <h3 className={styles.channelTitle}>{channelInfo?.title}</h3>
-          <p className={styles.channelSubscribe}>{processSubscribeCount(channelStatistics?.subscriberCount!)}</p>
+          {
+            channelStatistics?.hiddenSubscriberCount ? null : <p className={styles.channelSubscribe}>{processSubscribeCount(channelStatistics?.subscriberCount!)}</p>
+          }
           <p className={styles.describe}>{snippet?.description}</p>
         </div>
       </div>
       <hr />
       <div className={styles.commentsContainer}>
-        
+        <h3>댓글 {comments?.pageInfo.totalResults}개</h3>
+        {
+          comments && comments.items.map(comment => (<Comment key={comment.id} comment={comment.snippet.topLevelComment}/>))
+        }
       </div>
       <div style={{height: '100px'}}></div>
     </div>

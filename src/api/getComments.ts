@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 export const getComments = async (videoId: string) => {
-  const response = await axios.get<Comments>(`https://www.googleapis.com/youtube/v3/commentThreads?part=snippet&videoId=${videoId}&key=${process.env.REACT_APP_API_KEY}`);
+  const response = await axios.get<Comments>(`https://www.googleapis.com/youtube/v3/commentThreads?part=snippet&videoId=${videoId}&order=relevance&key=${process.env.REACT_APP_API_KEY}`);
   return response.data;
 }
 
