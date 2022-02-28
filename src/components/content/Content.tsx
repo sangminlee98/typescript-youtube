@@ -7,6 +7,7 @@ import { getMostPolularThunk } from '../../module/videos';
 import {AiOutlineLoading3Quarters} from 'react-icons/ai';
 import Video from '../video/Video';
 import styles from './Content.module.css';
+import HorizontalVideoCard from '../horizontalVideoCard/HorizontalVideoCard';
 
 const Content = () => {
   const parser = new DOMParser();
@@ -34,7 +35,7 @@ const Content = () => {
   );
   return (
     <div className={selected ? styles.selectedContainer : styles.container}>
-      <div className={selected ? '' : styles.grid}>
+      {/* <div className={selected ? '' : styles.grid}>
         {
           datas && datas.map((video, index) => (
             <div className={selected ? '' : styles.gridItem} key={index}>
@@ -50,7 +51,21 @@ const Content = () => {
           ))
         }
       </div>
-      <div style={{height:'100px'}}></div>
+      <div style={{height:'100px'}}></div> */}
+      {
+        datas && datas.map((video, index) => (
+          <div className={styles.horizontalContainer} key={index}>
+            <HorizontalVideoCard 
+              id={typeof video.id === 'string' ? video.id : video.id.videoId}
+              thumbnail={video.snippet.thumbnails.medium.url}
+              title={parser.parseFromString(video.snippet.title,'text/html').body.innerHTML}
+              channelId={video.snippet.channelId}
+              publishedAt={video.snippet.publishedAt}
+              video={video}
+            />
+          </div>
+          ))
+      }
     </div>
   );
 };

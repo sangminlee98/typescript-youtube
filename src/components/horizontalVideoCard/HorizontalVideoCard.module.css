@@ -1,0 +1,56 @@
+.container {
+  display: flex;
+}
+
+.thumbnail {
+  flex: 0 0 246px;
+  width: 246px;
+  margin-right: 1em;
+}
+
+.metadata {
+  flex: 1;
+  padding-right: 5em;
+}
+
+.title {
+  margin-bottom: 0.2em;
+}
+
+.videoMetadata {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.8em;
+}
+
+.viewCount,
+.publishedAt,
+.channelTitle,
+.desc {
+  font-size: 0.8em;
+  color: rgb(100, 100, 100);
+}
+.viewCount::after {
+  content: " • ";
+}
+.publishedAt {
+  font-size: 0.8em;
+  color: rgb(100, 100, 100);
+}
+.channelMetadata {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.8em;
+}
+.channelThumbnail {
+  width: 30px;
+  border-radius: 50%;
+  margin-right: 0.5em;
+}
+
+.desc {
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+}

@@ -16,6 +16,14 @@
   align-items: center;
 }
 
+.horizontalContainer {
+  margin-bottom: 0.7em;
+  transition: all 0.2s ease-in;
+}
+.horizontalContainer:hover {
+  transform: scale(1.02);
+}
+
 .loadingIcon {
   width: 80px;
   height: 80px;
