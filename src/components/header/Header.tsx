@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { Dispatch, SetStateAction, useState } from 'react';
 import styles from './Header.module.css';
 import { FiMenu } from 'react-icons/fi';
 import { IoSearchOutline } from 'react-icons/io5';
@@ -10,7 +10,11 @@ import { getSearchVideosThunk, getMostPolularThunk } from '../../module/videos';
 import { Link, useNavigate } from 'react-router-dom';
 import { init } from '../../module/selectedVideo';
 
-const Header = () => {
+type Props = {
+  setHorizon: Dispatch<SetStateAction<boolean>>
+}
+
+const Header = ({setHorizon}: Props) => {
   const navigate = useNavigate();
   const [input,setInput] = useState('');
   const dispatch = useDispatch();
@@ -22,6 +26,7 @@ const Header = () => {
     setInput('');
     navigate('/');
     dispatch(init());
+    setHorizon(true);
   }
   const onKeydown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if(e.nativeEvent.isComposing) return;
@@ -32,6 +37,7 @@ const Header = () => {
   const onClickLogo = () => {
     dispatch(init());
     dispatch(getMostPolularThunk());
+    setHorizon(false);
   }
   return (
     <div className={styles.header}>

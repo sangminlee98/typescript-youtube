@@ -1,5 +1,5 @@
 
-import React, { useEffect, useState } from 'react';
+import React, { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import { ChannelInfo, getChannels } from '../../api/getChannels';
 import { getStatistics, Statistics } from '../../api/getStatistics';
 import processViewCount from '../../utils/processViewCount';
@@ -20,9 +20,10 @@ type Props = {
   title: string,
   channelId: string,
   publishedAt: Date,
-  video: VideoDatas | SearchVideosData
+  video: VideoDatas | SearchVideosData,
+  setHorizon: Dispatch<SetStateAction<boolean>>
 }
-const Video = ({id, thumbnail, title, channelId, publishedAt, video}: Props) => {
+const Video = ({id, thumbnail, title, channelId, publishedAt, video, setHorizon}: Props) => {
   const [statistics, setStatistics] = useState<Statistics | null>();
   const [channelInfo, setChannelInfo] = useState<ChannelInfo | null>();
   const {selected} = useSelector(({selectedVideo}: RootState) => ({
@@ -41,6 +42,7 @@ const Video = ({id, thumbnail, title, channelId, publishedAt, video}: Props) => 
     dispatch(select(video));
     statistics && dispatch(selectStatistics(statistics));
     channelInfo && dispatch(selectChannel(channelInfo));
+    setHorizon(true);
   }
   useEffect(() => {
     onGetStatistics(id);

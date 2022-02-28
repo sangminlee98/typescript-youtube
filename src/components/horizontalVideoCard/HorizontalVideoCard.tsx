@@ -44,7 +44,24 @@ const HorizontalVideoCard = ({id, thumbnail, title, channelId, publishedAt, vide
     onGetStatistics(id);
     onGetChannelInfo(channelId);
   },[id, channelId]);
-  return (
+  if(selected) return (
+    <Link to={`/video/${id}`}>
+      <div className={styles.container} onClick={onClick}>
+        <img src={thumbnail} alt="thumbnail" className={styles.selectedThumbnail}/>
+        <div className={styles.selectedMetadata}>
+          <h4 className={styles.selectedTitle}>{title}</h4>
+          <div className={styles.selectedChannelMetadata}>
+            <p className={styles.channelTitle}>{channelInfo?.title}</p>
+          </div>
+          <div className={styles.selectedVideoMetadata}>
+            <p className={styles.viewCount}>{processViewCount(statistics?.viewCount!)}</p>
+            <p className={styles.publishedAt}>{moment.default(publishedAt).fromNow()}</p>
+          </div>
+        </div>
+      </div>
+    </Link>
+  )
+  else return (
     <Link to={`/video/${id}`}>
       <div className={styles.container} onClick={onClick}>
         <img src={thumbnail} alt="thumbnail" className={styles.thumbnail}/>

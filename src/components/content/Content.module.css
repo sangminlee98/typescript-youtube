@@ -1,5 +1,5 @@
 .selectedContainer {
-  flex: 0.25;
+  flex: 0.3;
   overflow-y: scroll;
   box-sizing: border-box;
   padding-left: 1em;

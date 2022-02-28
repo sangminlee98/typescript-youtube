@@ -1,4 +1,4 @@
-import React, { useEffect }  from 'react';
+import React, { Dispatch, SetStateAction, useEffect }  from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { RootState } from '../../module';
@@ -9,7 +9,11 @@ import Video from '../video/Video';
 import styles from './Content.module.css';
 import HorizontalVideoCard from '../horizontalVideoCard/HorizontalVideoCard';
 
-const Content = () => {
+type Props = {
+  horizon: boolean,
+  setHorizon: Dispatch<SetStateAction<boolean>>
+}
+const Content = ({horizon, setHorizon}: Props) => {
   const parser = new DOMParser();
   const param = useParams();
   const {loading, datas} = useSelector(({videos}: RootState) => ({
@@ -33,25 +37,8 @@ const Content = () => {
       <AiOutlineLoading3Quarters className={styles.loadingIcon}/>
     </div>
   );
-  return (
+  if(horizon) return (
     <div className={selected ? styles.selectedContainer : styles.container}>
-      {/* <div className={selected ? '' : styles.grid}>
-        {
-          datas && datas.map((video, index) => (
-            <div className={selected ? '' : styles.gridItem} key={index}>
-              <Video 
-                id={typeof video.id === 'string' ? video.id : video.id.videoId}
-                thumbnail={video.snippet.thumbnails.medium.url}
-                title={parser.parseFromString(video.snippet.title,'text/html').body.innerHTML}
-                channelId={video.snippet.channelId}
-                publishedAt={video.snippet.publishedAt}
-                video={video}
-              />
-            </div>
-          ))
-        }
-      </div>
-      <div style={{height:'100px'}}></div> */}
       {
         datas && datas.map((video, index) => (
           <div className={styles.horizontalContainer} key={index}>
@@ -66,6 +53,29 @@ const Content = () => {
           </div>
           ))
       }
+      <div style={{height:'100px'}}></div>
+    </div>
+  )
+  else return (
+    <div className={styles.container}>
+      <div className={styles.grid}>
+        {
+          datas && datas.map((video, index) => (
+            <div className={styles.gridItem} key={index}>
+              <Video 
+                id={typeof video.id === 'string' ? video.id : video.id.videoId}
+                thumbnail={video.snippet.thumbnails.medium.url}
+                title={parser.parseFromString(video.snippet.title,'text/html').body.innerHTML}
+                channelId={video.snippet.channelId}
+                publishedAt={video.snippet.publishedAt}
+                video={video}
+                setHorizon={setHorizon}
+              />
+            </div>
+          ))
+        }
+      </div>
+      <div style={{height:'100px'}}></div>
     </div>
   );
 };
