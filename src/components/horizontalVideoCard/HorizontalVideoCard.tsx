@@ -21,6 +21,7 @@ type Props = {
   video: VideoDatas | SearchVideosData
 }
 const HorizontalVideoCard = ({id, thumbnail, title, channelId, publishedAt, video}: Props) => {
+  const parser = new DOMParser();
   const [statistics, setStatistics] = useState<Statistics | null>();
   const [channelInfo, setChannelInfo] = useState<ChannelInfo | null>();
   const {selected} = useSelector(({selectedVideo}: RootState) => ({
@@ -49,7 +50,7 @@ const HorizontalVideoCard = ({id, thumbnail, title, channelId, publishedAt, vide
       <div className={styles.container} onClick={onClick}>
         <img src={thumbnail} alt="thumbnail" className={styles.selectedThumbnail}/>
         <div className={styles.selectedMetadata}>
-          <h4 className={styles.selectedTitle}>{title}</h4>
+          <h4 className={styles.selectedTitle}>{parser.parseFromString(title,'text/html').body.innerHTML}</h4>
           <div className={styles.selectedChannelMetadata}>
             <p className={styles.channelTitle}>{channelInfo?.title}</p>
           </div>
@@ -66,7 +67,7 @@ const HorizontalVideoCard = ({id, thumbnail, title, channelId, publishedAt, vide
       <div className={styles.container} onClick={onClick}>
         <img src={thumbnail} alt="thumbnail" className={styles.thumbnail}/>
         <div className={styles.metadata}>
-          <h3 className={styles.title}>{title}</h3>
+          <h3 className={styles.title}>{parser.parseFromString(title,'text/html').body.innerHTML}</h3>
           <div className={styles.videoMetadata}>
             <p className={styles.viewCount}>{processViewCount(statistics?.viewCount!)}</p>
             <p className={styles.publishedAt}>{moment.default(publishedAt).fromNow()}</p>
