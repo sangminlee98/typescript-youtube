@@ -14,7 +14,19 @@ const Main = ({horizon, setHorizon}: Props) => {
     <Routes>
       <Route path='/' element={
         <div className={styles.container}> 
-          <Menu/>
+          <Menu activeMenu='home'/>
+          <Content horizon={horizon} setHorizon={setHorizon}/>
+        </div>}
+      />
+      <Route path='/explore' element={
+        <div className={styles.container}> 
+          <Menu activeMenu='explore'/>
+          <Content horizon={horizon} setHorizon={setHorizon}/>
+        </div>}
+      />
+      <Route path='/subscribe' element={
+        <div className={styles.container}> 
+          <Menu activeMenu='subscribe'/>
           <Content horizon={horizon} setHorizon={setHorizon}/>
         </div>}
       />
