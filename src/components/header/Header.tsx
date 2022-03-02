@@ -11,10 +11,12 @@ import { Link, useNavigate } from 'react-router-dom';
 import { init } from '../../module/selectedVideo';
 
 type Props = {
-  setHorizon: Dispatch<SetStateAction<boolean>>
+  toggleMenu: boolean,
+  setHorizon: Dispatch<SetStateAction<boolean>>,
+  setToggleMenu: Dispatch<SetStateAction<boolean>>
 }
 
-const Header = ({setHorizon}: Props) => {
+const Header = ({toggleMenu, setHorizon, setToggleMenu}: Props) => {
   const navigate = useNavigate();
   const [input,setInput] = useState('');
   const dispatch = useDispatch();
@@ -39,10 +41,13 @@ const Header = ({setHorizon}: Props) => {
     dispatch(getMostPolularThunk());
     setHorizon(false);
   }
+  const onClickHamberger = () => {
+    setToggleMenu(!toggleMenu);
+  }
   return (
     <div className={styles.header}>
       <div className={styles.tab}>
-        <FiMenu className={styles.icon}/>
+        <FiMenu className={styles.icon} onClick={onClickHamberger}/>
         <Link to='/'><img src={youtub_logo} alt="logo" onClick={onClickLogo} className={styles.logo}/></Link>
       </div>
       <div className={styles['center-tab']}>

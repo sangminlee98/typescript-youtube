@@ -6,10 +6,11 @@ import Main from './components/main/Main';
 export type ActiveMenu = 'home' | 'explore' | 'subscribe';
 function App() {
   const [horizon, setHorizon] = useState(false);
+  const [toggleMenu, setToggleMenu] = useState(false);
   return (
     <div>
-      <Header setHorizon={setHorizon}/>
-      <Main horizon={horizon} setHorizon={setHorizon}/>  
+      <Header toggleMenu={toggleMenu} setHorizon={setHorizon} setToggleMenu={setToggleMenu}/>
+      <Main toggleMenu={toggleMenu} horizon={horizon} setHorizon={setHorizon}/>  
     </div>
   );
 }

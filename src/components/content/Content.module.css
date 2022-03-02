@@ -42,6 +42,12 @@
   }
 }
 
+.toggleMenuContainer {
+  flex: 1;
+  padding: 12px;
+  overflow-y: scroll;
+  box-sizing: border-box;
+}
 .container {
   margin-left: 240px;
   flex: 1;

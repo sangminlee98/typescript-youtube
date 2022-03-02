@@ -6,34 +6,35 @@ import VideoDetail from '../videoDetail/VideoDetail';
 import styles from './Main.module.css';
 
 type Props = {
+  toggleMenu: boolean,
   horizon: boolean,
   setHorizon: Dispatch<SetStateAction<boolean>>
 }
-const Main = ({horizon, setHorizon}: Props) => {
+const Main = ({toggleMenu, horizon, setHorizon}: Props) => {
   return (
     <Routes>
       <Route path='/' element={
         <div className={styles.container}> 
-          <Menu activeMenu='home'/>
-          <Content horizon={horizon} setHorizon={setHorizon}/>
+          {toggleMenu ? null : <Menu activeMenu='home'/>}
+          <Content toggleMenu={toggleMenu} horizon={horizon} setHorizon={setHorizon}/>
         </div>}
       />
       <Route path='/explore' element={
         <div className={styles.container}> 
-          <Menu activeMenu='explore'/>
-          <Content horizon={horizon} setHorizon={setHorizon}/>
+          {toggleMenu ? null : <Menu activeMenu='explore'/>}
+          <Content toggleMenu={toggleMenu} horizon={horizon} setHorizon={setHorizon}/>
         </div>}
       />
       <Route path='/subscribe' element={
         <div className={styles.container}> 
-          <Menu activeMenu='subscribe'/>
-          <Content horizon={horizon} setHorizon={setHorizon}/>
+          {toggleMenu ? null : <Menu activeMenu='subscribe'/>}
+          <Content toggleMenu={toggleMenu} horizon={horizon} setHorizon={setHorizon}/>
         </div>}
       />
       <Route path='/video/:id' element={
         <div className={styles.container}>
           <VideoDetail/>
-          <Content horizon={horizon} setHorizon={setHorizon}/>
+          <Content toggleMenu={toggleMenu} horizon={horizon} setHorizon={setHorizon}/>
         </div>}
       />
     </Routes>

@@ -10,10 +10,11 @@ import styles from './Content.module.css';
 import HorizontalVideoCard from '../horizontalVideoCard/HorizontalVideoCard';
 
 type Props = {
+  toggleMenu: boolean,
   horizon: boolean,
   setHorizon: Dispatch<SetStateAction<boolean>>
 }
-const Content = ({horizon, setHorizon}: Props) => {
+const Content = ({toggleMenu, horizon, setHorizon}: Props) => {
   const parser = new DOMParser();
   const param = useParams();
   const {loading, datas} = useSelector(({videos}: RootState) => ({
@@ -38,7 +39,7 @@ const Content = ({horizon, setHorizon}: Props) => {
     </div>
   );
   if(horizon) return (
-    <div className={selected ? styles.selectedContainer : styles.container}>
+    <div className={selected ? styles.selectedContainer : toggleMenu ? styles.toggleMenuContainer : styles.container}>
       {
         datas && datas.map((video, index) => (
           <div className={styles.horizontalContainer} key={index}>
@@ -57,7 +58,7 @@ const Content = ({horizon, setHorizon}: Props) => {
     </div>
   )
   else return (
-    <div className={styles.container}>
+    <div className={toggleMenu ? styles.toggleMenuContainer : styles.container}>
       <div className={styles.grid}>
         {
           datas && datas.map((video, index) => (
