@@ -1,6 +1,6 @@
 import { getSearchVideos, SearchVideosData } from './../api/getSearchVideos';
 import { getVideos, VideoDatas } from '../api/getVideos';
-import {ActionType, createAsyncAction, createReducer} from 'typesafe-actions';
+import {ActionType, createAction, createAsyncAction, createReducer} from 'typesafe-actions';
 import { AxiosError } from 'axios';
 import { ThunkAction } from 'redux-thunk';
 import { RootState } from './index';
@@ -13,21 +13,23 @@ const GET_SEARCH = 'getSearch/GET_SEARCH';
 const GET_SEARCH_SUCCESS = 'getSearch/GET_SEARCH_SUCCESS';
 const GET_SEARCH_FAILURE = 'getSearch/GET_SEARCH_FAILURE';
 
+const SET_VIDEOS = 'setVideo/SET_VIDEOS';
+
 export const getMostPopularAsync = createAsyncAction(
   GET_VIDEOS,
   GET_VIDEOS_SUCCESS,
   GET_VIDEOS_FAILURE
 )<undefined, VideoDatas[], AxiosError>();
-
 export const getSearchVideoAsync = createAsyncAction(
   GET_SEARCH,
   GET_SEARCH_SUCCESS,
   GET_SEARCH_FAILURE
 )<undefined, SearchVideosData[], AxiosError>();
+export const setVideos = createAction(SET_VIDEOS)<VideoDatas[]>();
 
 export type MostPopularAction = ActionType<typeof getMostPopularAsync>;
-
 export type SearchVideosAction = ActionType<typeof getSearchVideoAsync>;
+export type SetVideosAction = ActionType<typeof setVideos>;
 
 export type VideoState = {
   loading: boolean,
@@ -67,7 +69,7 @@ const initialState: VideoState = {
   error: null
 }
 
-const videos = createReducer<VideoState, MostPopularAction | SearchVideosAction>(initialState, {
+const videos = createReducer<VideoState, MostPopularAction | SearchVideosAction | SetVideosAction >(initialState, {
   [GET_VIDEOS]: state => ({
     ...state,
     loading: true
@@ -95,6 +97,10 @@ const videos = createReducer<VideoState, MostPopularAction | SearchVideosAction>
     ...state,
     loading: false,
     error: action.payload
+  }),
+  [SET_VIDEOS]: (state, action) => ({
+    ...state,
+    datas: action.payload
   })
 })
 

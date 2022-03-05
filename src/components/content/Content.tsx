@@ -8,6 +8,7 @@ import {AiOutlineLoading3Quarters} from 'react-icons/ai';
 import Video from '../video/Video';
 import styles from './Content.module.css';
 import HorizontalVideoCard from '../horizontalVideoCard/HorizontalVideoCard';
+import Filter from '../filter/Filter';
 
 type Props = {
   toggleMenu: boolean,
@@ -59,6 +60,7 @@ const Content = ({toggleMenu, horizon, setHorizon}: Props) => {
   )
   else return (
     <div className={toggleMenu ? styles.toggleMenuContainer : styles.container}>
+      <Filter/>
       <div className={styles.grid}>
         {
           datas && datas.map((video, index) => (
