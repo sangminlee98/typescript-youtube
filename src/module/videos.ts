@@ -2,8 +2,7 @@ import { getSearchVideos, SearchVideosData } from './../api/getSearchVideos';
 import { getVideos, VideoDatas } from '../api/getVideos';
 import {ActionType, createAction, createAsyncAction, createReducer} from 'typesafe-actions';
 import { AxiosError } from 'axios';
-import { ThunkAction } from 'redux-thunk';
-import { RootState } from './index';
+import createAsyncThunk from '../utils/createAsyncThunk';
 
 const GET_VIDEOS = 'mostPopular/GET_VIDEOS';
 const GET_VIDEOS_SUCCESS = 'mostPopular/GET_VIDEOS_SUCCESS';
@@ -19,12 +18,12 @@ export const getMostPopularAsync = createAsyncAction(
   GET_VIDEOS,
   GET_VIDEOS_SUCCESS,
   GET_VIDEOS_FAILURE
-)<undefined, VideoDatas[], AxiosError>();
+)<any, VideoDatas[], AxiosError>();
 export const getSearchVideoAsync = createAsyncAction(
   GET_SEARCH,
   GET_SEARCH_SUCCESS,
   GET_SEARCH_FAILURE
-)<undefined, SearchVideosData[], AxiosError>();
+)<any, SearchVideosData[], AxiosError>();
 export const setVideos = createAction(SET_VIDEOS)<VideoDatas[]>();
 
 export type MostPopularAction = ActionType<typeof getMostPopularAsync>;
@@ -37,31 +36,8 @@ export type VideoState = {
   error?: Error | null
 }
 
-export const getMostPolularThunk = (): ThunkAction<Promise<void>, RootState, null, MostPopularAction> => {
-  return async dispatch => {
-    const {request, success, failure} = getMostPopularAsync;
-    dispatch(request());
-    try {
-      const videoDatas = await getVideos();
-      dispatch(success(videoDatas));
-    } catch (e) {
-      dispatch(failure(e as AxiosError));
-    }
-  }
-}
-
-export const getSearchVideosThunk = (query: string): ThunkAction<Promise<void>, RootState, null, SearchVideosAction> => {
-  return async dispatch => {
-    const {request, success, failure} = getSearchVideoAsync;
-    dispatch(request());
-    try {
-      const searchDatas = await getSearchVideos(query);
-      dispatch(success(searchDatas));
-    } catch (e) {
-      dispatch(failure(e as AxiosError));
-    }
-  }
-}
+export const getMostPopularThunk = createAsyncThunk(getMostPopularAsync, getVideos);
+export const getSearchVideosThunk = createAsyncThunk(getSearchVideoAsync, getSearchVideos);
 
 const initialState: VideoState = {
   loading: false,

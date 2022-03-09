@@ -1,7 +1,7 @@
 import { Dispatch } from 'react';
 import { AsyncActionCreatorBuilder } from 'typesafe-actions';
 
-type AnyCreateAsyncAction = AsyncActionCreatorBuilder<any, any, any>;
+type AnyCreateAsyncAction = AsyncActionCreatorBuilder<[any, any], [any, any], [any, any]>;
 
 export default function createAsyncThunk<A extends AnyCreateAsyncAction, F extends (...params: any[]) => Promise<any>>(
   asyncActionCreator: A,
@@ -11,7 +11,7 @@ export default function createAsyncThunk<A extends AnyCreateAsyncAction, F exten
   return function thunk(...params: Params) {
     return async (dispatch: Dispatch<any>) => {
       const {request, success, failure} = asyncActionCreator;
-      dispatch(request());
+      dispatch(request(undefined));
       try {
         const response = await promiseCreator(...params);
         dispatch(success(response));

@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { RootState } from '../../module';
 import { init } from '../../module/selectedVideo';
-import { getMostPolularThunk } from '../../module/videos';
+import { getMostPopularThunk } from '../../module/videos';
 import {AiOutlineLoading3Quarters} from 'react-icons/ai';
 import Video from '../video/Video';
 import styles from './Content.module.css';
@@ -27,7 +27,7 @@ const Content = ({toggleMenu, horizon, setHorizon}: Props) => {
   }));
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(getMostPolularThunk());
+    dispatch(getMostPopularThunk());
   },[dispatch]);
   useEffect(() => {
     if(param.id === undefined) {

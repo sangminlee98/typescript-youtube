@@ -6,7 +6,7 @@ import { BsGrid3X3Gap } from 'react-icons/bs';
 import { HiOutlineDotsVertical } from 'react-icons/hi';
 import youtub_logo from '../../data/youtube_logo.png';
 import { useDispatch } from 'react-redux';
-import { getSearchVideosThunk, getMostPolularThunk } from '../../module/videos';
+import { getSearchVideosThunk, getMostPopularThunk } from '../../module/videos';
 import { Link, useNavigate } from 'react-router-dom';
 import { init } from '../../module/selectedVideo';
 
@@ -38,7 +38,7 @@ const Header = ({toggleMenu, setHorizon, setToggleMenu}: Props) => {
   }
   const onClickLogo = () => {
     dispatch(init());
-    dispatch(getMostPolularThunk());
+    dispatch(getMostPopularThunk());
     setHorizon(false);
   }
   const onClickHamberger = () => {
